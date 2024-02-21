@@ -4,11 +4,9 @@ Petunjuk menjalankan aplikasi:
 
 2. Menjalankan perintah `npm install`.
 
-3. Menyalin file .env.example.
+3. Mengisi URL MongoDB Compass Sesuai dengan Collection di MongoDB
 
-4. Mengubah nama salinan file .env.example menjadi .env.
-
-5. Mengisi nilai variabel pada .env dengan nilai sebagai berikut:
+5. Mengisi nilai variabel pada .env dengan nilai sebagai berikut: (Jika Menggunakan .env)
 
    - PORT
      PORT yang akan digunakan oleh server backend
