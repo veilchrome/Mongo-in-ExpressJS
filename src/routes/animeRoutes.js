@@ -5,6 +5,6 @@ const controllerAnime = require("../Controllers/animeController");
 router.get("/", controllerAnime.getAnimeByTitle);
 
 // DELETE Endpoint
-router.delete("/:id", controllerAnime.deleteAnimeById);
+router.delete("/:mal_id", controllerAnime.deleteAnimeById);
 
 module.exports = router;

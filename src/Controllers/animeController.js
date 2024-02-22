@@ -1,6 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 const Anime = require("../Models/animeModel");
+const { isValidObjectId } = require("mongoose");
 
 const getAnimeByTitle = async (req, res) => {
   try {
@@ -35,16 +36,26 @@ const getAnimeByTitle = async (req, res) => {
 };
 
 const deleteAnimeById = async (req, res) => {
+  console.log(req.params.mal_id);
   try {
-    const anime = await Anime.findById(req.params.id);
+    if (!req.params.mal_id) {
+      return res.status(400).json({ message: "Missing 'id' parameter" });
+    }
+
+    if (!isValidObjectId(req.params.mal_id)) {
+      return res.status(400).json({ message: "Invalid 'id' parameter" });
+    }
+
+    const anime = await Anime.findById(req.params.mal_id);
     if (!anime) {
       return res.status(404).json({ message: "Anime not found" });
     }
+
     await anime.remove();
-    res.json({ message: "Success: Anime deleted successfully" });
+    return res.json({ message: "Success: Anime deleted successfully" });
   } catch (error) {
     console.error("Error:", error.message);
-    res.status(500).json({
+    return res.status(500).json({
       message: "Internal Server Error",
       error: error.message,
     });
